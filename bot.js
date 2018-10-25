@@ -21,6 +21,11 @@ client.on('message', function(message) {
            msg.delete(5000);
           message.delete(5000);
         });
+	       } else  if (message.content.startsWith(prefix + 'play')) {
+    if (message.author.id !== 'myID') return message.reply('** هذا الأمر فقط لصاحب البوت و شكراًً **')
+    client.user.setGame(argresult);
+        message.channel.sendMessage(`**${argresult}** : تم تغيير الحالة`)
+    } else
     } else if(message.content.startsWith(prefix + "listen")) {
 				        if(message.author.id !== myID) return;
             if(!args) return message.reply('ا تلعب في حساب غيرك ياشاطر');
