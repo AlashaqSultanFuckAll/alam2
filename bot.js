@@ -1,54 +1,35 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const prefix = '!'
-client.on('ready', () => {
-  console.log('======================================')
-  console.log(`Logged in as ${client.user.tag}!`);
-  console.log('')
-  console.log(`servers! [ " ${client.guilds.size} " ]`);
-  console.log('')
-  console.log(`Users! [ " ${client.users.size} " ]`);
-  console.log('=======================================')
+
+client.on('message', function(message) {
+	const myID = "321779633252990976";
+    let args = message.content.split(" ").slice(1).join(" ");
+    if(message.content.startsWith(prefix + "changename")) {
+		        if(message.author.id !== myID) return;
+            if(!args) return message.reply('لا تلعب في حساب غيرك ياشاطر');
+        client.user.setUsername(args);
+        message.channel.send(':white_check_mark: Done!').then(msg => {
+           msg.delete(5000);
+          message.delete(5000);
+        });
+    } else if(message.content.startsWith(prefix + "stream")) {
+		        if(message.author.id !== myID) return;
+            if(!args) return message.reply('ا تلعب في حساب غيرك ياشاطر');
+        client.user.setGame(args , 'https://twitch.tv/6xlez1');
+        message.channel.send(':white_check_mark: Done!').then(msg => {
+           msg.delete(5000);
+          message.delete(5000);
+        });
+    } else if(message.content.startsWith(prefix + "listen")) {
+				        if(message.author.id !== myID) return;
+            if(!args) return message.reply('ا تلعب في حساب غيرك ياشاطر');
+        client.user.setActivity(args, {type:'LISTENING'});
+        message.channel.send(':white_check_mark: Done!').then(msg => {
+           msg.delete(5000);
+          message.delete(5000);
+    });
+    }
 });
 
-client.on('message', message => {
-    var prefix = "$";
-
-      if (!message.content.startsWith(prefix)) return;
-      var args = message.content.split(' ').slice(1);
-      var argresult = args.join(' ');
-      if (message.author.id == 394565174184640524) return;
-
-
-    if (message.content.startsWith(prefix + 'playing')) {
-    if (message.author.id !== '394565174184640524') return message.reply('**  لا تلعب ياحبيبي في حساب غيرك**')
-    client.user.setGame(argresult);
-        message.channel.sendMessage(`**${argresult}** : تم تغيير الحالة`)
-    } else
-
-
-    if (message.content.startsWith(prefix + 'streem')) {
-    if (message.author.id !== '394565174184640524') return message.reply('**  لا تلعب ياحبيبي في حساب غيرك **')
-    client.user.setGame(argresult, "http://twitch.tv/fivestore");
-        message.channel.sendMessage(`**${argresult}** :تم تغيير الحالة الى ستريمنج`)
-    } else
-
-    if (message.content.startsWith(prefix + 'setname')) {
-    if (message.author.id !== '394565174184640524') return message.reply('**  لا تلعب ياحبيبي في حساب غيرك **')
-      client.user.setUsername(argresult).then
-          message.channel.sendMessage(`**${argresult}** : تم تغير الأسم`)
-      return message.reply("**لا تستطيع تغير الأسم الا بعد ساعتين**");
-    } else
-
-    if (message.content.startsWith(prefix + 'setavatar')) {
-    if (message.author.id !== '394565174184640524') return message.reply('** لا تلعب ياحبيبي في حساب غيرك **')
-    client.user.setAvatar(argresult);
-        message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-    }
-
-
-
-     });
-
 client.login(process.env.BOT_TOKEN);
-
