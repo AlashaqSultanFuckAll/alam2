@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const prefix = '!'
 
 client.on('message', function(message) {
-	const myID = "MzMwMDEwODQ0MTk5MTI0OTky.D38I7g.5ChBaBEb1wdBlpK4ZXVcDTJ1cuU";
+	const myID = "330010844199124992";
     let args = message.content.split(" ").slice(1).join(" ");
     if(message.content.startsWith(prefix + "changename")) {
 		        if(message.author.id !== myID) return;
